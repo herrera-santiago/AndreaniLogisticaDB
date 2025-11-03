@@ -131,17 +131,15 @@ CREATE TABLE Ruta (
 
 CREATE TABLE Parada (
     id INT IDENTITY(1,1) PRIMARY KEY,
-    codigo VARCHAR(100) NOT NULL,
-    qr VARCHAR(255),
-    peso INT NOT NULL,
-    idVehiculo INT NULL,
-    FOREIGN KEY (idVehiculo) REFERENCES Vehiculo(id)
+    ubicacion VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE Ruta_Parada (
     id INT IDENTITY(1,1) PRIMARY KEY,
     idRuta INT NOT NULL,
     idParada INT NOT NULL,
+    orden INT NOT NULL,
     FOREIGN KEY (idRuta) REFERENCES Ruta(id),
     FOREIGN KEY (idParada) REFERENCES Parada(id)
 );
+
