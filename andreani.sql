@@ -143,3 +143,57 @@ CREATE TABLE Ruta_Parada (
     FOREIGN KEY (idParada) REFERENCES Parada(id)
 );
 
+-- ROLES Y SEGURIDAD
+
+CREATE ROLE administrador;
+GO
+
+CREATE ROLE chofer;
+GO
+
+CREATE ROLE operador_logistica;
+GO
+
+-- Administrador (Permisos completos)
+GRANT CONTROL ON DATABASE::AndreaniLogisticaDB TO administrador;
+GO
+
+-- Chofer (Ver rutas, paradas, pedidos asignados. Actualizar estados de entrega)
+GRANT SELECT ON dbo.Ruta TO chofer;
+GRANT SELECT ON dbo.Ruta_Parada TO chofer;
+GRANT SELECT ON dbo.Parada TO chofer;
+GRANT SELECT ON dbo.Vehiculo TO chofer;
+GRANT SELECT ON dbo.Chofer TO chofer;
+GRANT SELECT ON dbo.Pedido TO chofer;
+GRANT SELECT ON dbo.Cliente TO chofer;
+GRANT SELECT ON dbo.Caja TO chofer;
+GRANT SELECT ON dbo.Caja_Pedido TO chofer;
+GRANT SELECT ON dbo.EstadoPedido TO chofer;
+GO
+
+GRANT UPDATE ON dbo.Pedido (idEstado) TO chofer;
+GO
+
+-- Operador Logistica (Permisos CRUD para el proceso logistico excepto vehiculos y choferes)
+GRANT SELECT, INSERT, UPDATE, DELETE ON dbo.Cliente TO operador_logistica;
+GRANT SELECT, INSERT, UPDATE, DELETE ON dbo.Pedido TO operador_logistica;
+GRANT SELECT, INSERT, UPDATE, DELETE ON dbo.Producto TO operador_logistica;
+GRANT SELECT, INSERT, UPDATE, DELETE ON dbo.Lote TO operador_logistica;
+GRANT SELECT, INSERT, UPDATE, DELETE ON dbo.Pedido_Producto TO operador_logistica;
+GRANT SELECT, INSERT, UPDATE, DELETE ON dbo.Picking TO operador_logistica;
+GRANT SELECT, INSERT, UPDATE, DELETE ON dbo.Caja TO operador_logistica;
+GRANT SELECT, INSERT, UPDATE, DELETE ON dbo.Caja_Pedido TO operador_logistica;
+GO
+
+GRANT SELECT ON dbo.TipoCliente TO operador_logistica;
+GRANT SELECT ON dbo.EstadoPedido TO operador_logistica;
+GRANT SELECT ON dbo.EstadoLote TO operador_logistica;
+GRANT SELECT ON dbo.TipoVehiculo TO operador_logistica;
+GO
+
+GRANT SELECT ON dbo.Vehiculo TO operador_logistica;
+GRANT SELECT ON dbo.Ruta TO operador_logistica;
+GRANT SELECT ON dbo.Chofer TO operador_logistica;
+GRANT SELECT ON dbo.Parada TO operador_logistica;
+GRANT SELECT ON dbo.Ruta_Parada TO operador_logistica;
+GO
