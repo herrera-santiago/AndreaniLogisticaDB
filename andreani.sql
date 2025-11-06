@@ -26,7 +26,7 @@ CREATE TABLE TipoVehiculo (
     id INT IDENTITY(1,1) PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
     refrigeracion BIT NOT NULL CHECK (refrigeracion IN (0,1)),
-    capacidad BOOL NOT NULL CHECK (capacidad IN (0,1))
+    capacidad INT NOT NULL
 );
 
 CREATE TABLE Cliente (

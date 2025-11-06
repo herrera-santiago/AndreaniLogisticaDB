@@ -24,9 +24,9 @@ SET IDENTITY_INSERT EstadoLote OFF;
 
 SET IDENTITY_INSERT TipoVehiculo ON;
 INSERT INTO TipoVehiculo (id, nombre, refrigeracion, capacidad) VALUES
-(1, 'Kangoo Refrigerada', 1, 1),
-(2, 'Sprinter Seco',       0, 1),
-(3, 'Furgón Urbano',       0, 1);
+(1, 'Kangoo Refrigerada', 1, 200),
+(2, 'Sprinter Seco',       0, 50),
+(3, 'Furgón Urbano',       0, 100);
 SET IDENTITY_INSERT TipoVehiculo OFF;
 
 /* ===========================
