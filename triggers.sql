@@ -44,7 +44,7 @@ BEGIN
     IF EXISTS (
         SELECT 1
         FROM deleted d
-        WHERE d.idEstadoPedido = 4  -- 4 = ENTREGADO
+        WHERE d.idEstado = 4  -- 4 = ENTREGADO
     )
     BEGIN
         RAISERROR ('No se permite modificar un pedido que ya fue ENTREGADO.', 16, 1);
@@ -67,7 +67,7 @@ BEGIN
     IF EXISTS (
         SELECT 1
         FROM deleted d
-        WHERE d.idEstadoPedido = 4  -- ENTREGADO
+        WHERE d.idEstado = 4  -- ENTREGADO
     )
     BEGIN
         RAISERROR ('No se permite eliminar un pedido que ya fue ENTREGADO.', 16, 1);
@@ -93,7 +93,7 @@ BEGIN
         SELECT 1
         FROM deleted d
         INNER JOIN Pedido p ON p.id = d.idPedido
-        WHERE p.idEstadoPedido = 4   -- 4 = ENTREGADO
+        WHERE p.idEstado = 4   -- 4 = ENTREGADO
     )
     BEGIN
         RAISERROR ('No se permite modificar un picking de un pedido ya ENTREGADO.', 16, 1);
@@ -117,7 +117,7 @@ BEGIN
         SELECT 1
         FROM deleted d
         INNER JOIN Pedido p ON p.id = d.idPedido
-        WHERE p.idEstadoPedido = 4   -- ENTREGADO
+        WHERE p.idEstado = 4   -- ENTREGADO
     )
     BEGIN
         RAISERROR ('No se permite eliminar un picking de un pedido ya ENTREGADO.', 16, 1);

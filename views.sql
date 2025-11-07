@@ -13,7 +13,6 @@ INNER JOIN Vehiculo v ON v.id = r.idVehiculo
 INNER JOIN Chofer c ON c.id = v.idChofer
 INNER JOIN Ruta_Parada rp ON rp.idRuta = r.id
 INNER JOIN Parada p ON p.id = rp.idParada
-ORDER BY r.id, rp.orden;
 GO
 
 -- VISTA PARA OBTENER PEDIDOS CON DETALLES DE PRODUCTOS Y CAJAS ASOCIADAS

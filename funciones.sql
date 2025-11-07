@@ -64,22 +64,21 @@ GO
 -- Devuelve los lotes habilitados y no vencidos para un producto dado.
 -- Se puede usar para FEFO en picking.
 CREATE FUNCTION fn_LotesDisponiblesPorProducto (@idProducto INT)
-RETURNS TABLE
-AS
-RETURN
-(
-    SELECT -- Seleccionamos los campos relevantes del lote
-        l.id,
-        l.codigoLote,
-        l.fechaCaducidad,
-        l.idEstadoLote,
-        dbo.fn_DiasHastaVencimiento(l.id) AS diasHastaVencimiento --  usamos la función fn_DiasHastaVencimiento
-    FROM Lote l
-    WHERE l.idProducto = @idProducto -- Filtramos por el producto dado
-      AND l.idEstadoLote = 1            -- Habilitado
-      AND diasHastaVencimiento >= 0    -- No vencido
-    ORDER BY l.fechaCaducidad ASC      -- Ordenamos por fecha de caducidad
-);
+    RETURNS TABLE
+        AS
+        RETURN
+        (
+        SELECT
+            l.id,
+            l.codigoLote,
+            l.fechaCaducidad,
+            l.idEstadoLote,
+            dbo.fn_DiasHastaVencimiento(l.id) AS diasVencimiento
+        FROM Lote l
+        WHERE l.idProducto = @idProducto
+          AND l.idEstadoLote = 1
+          AND dbo.fn_DiasHastaVencimiento(l.id) >= 0
+        );
 GO
 
 -- EJEMPLO DE USO:
